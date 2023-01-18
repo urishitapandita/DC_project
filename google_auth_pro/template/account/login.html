@@ -1,0 +1,46 @@
+{% extends "account/base.html" %}
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_filters %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="wrapper">
+        <div class="title"><span>Login Form</span>
+        </div>
+            <form class="login" method="POST" action="{% url 'account_login' %}">
+            {% csrf_token %}
+            <div class="row">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="Username" required>
+            </div>
+            <div class="row">
+                <i class="fas fa-lock"></i>
+                <input type="password" placeholder="Password" required>
+            </div>
+            <div class="pass"><a href="{% url 'account_reset_password' %}" >Forgot password?{{ user.username }}</a>
+            </div>
+            <div class="row button">
+                <input type="submit" value="Login">
+            </div>
+            <div>
+                <h2 style="margin-left: 154px;color:#4C3575;margin-bottom:3px;">OR</h2>
+            </div>
+                <div class="socialaccount_ballot">
+                    <div class="socialaccount_providers">
+                        <a style="margin-left: 65px;" title="Google" class="socialaccount_provider google" href="/accounts/google/login/?process=login">
+                            {% load static %}
+                            <img class="row" src="{% static 'google_sign_in.png' %}">
+                        </a>
+                    </div>
+                </div>
+            </form>
+    </div>
+</div>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script>
+$(function(){
+ $("#signin").addClass("active");
+ });
+</script>
+{% endblock %}

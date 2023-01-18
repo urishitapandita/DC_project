@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      {% load static %}
+      <link rel="stylesheet" href="{% static 'style.css' %}">
+      <link rel="stylesheet" href="{% static 'drop.css' %}">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"/>
+      <title>{% block head_title %}{% endblock %}</title>
+  </head>
+  <body>
+    {% block body %}
+    <nav>
+      <div class="logo">Google Auth App
+      </div>
+      <input type="checkbox" id="click">
+      <label for="click" class="menu-btn">
+        <i class="fas fa-bars"></i>
+      </label>
+      <ul>
+           {% if user.is_authenticated %}
+          <li><a id="home" class="" href="{% url 'home' %}">Home</a></li>
+          <li><a id="signout" class="" href="{% url 'account_logout' %}">Sign Out</a></li>
+          <li><a class="" href="">Hello {{ user.first_name }}</a></li>
+          {% else %}
+          <li><a id="signin" class="" href="{% url 'account_login' %}">Sign In</a></li>
+          <li><a id="signup" class="" href="{% url 'account_signup' %}">Sign Up</a></li>
+          {% endif %}
+      </ul>
+    </nav>
+    {% block content %}
+    {% endblock %}
+    {% endblock %}
+   <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+  </body>
+</html>
